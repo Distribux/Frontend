@@ -1,3 +1,6 @@
+import PurchaseOrder from '@/types/PurchaseOrder';
+import PurchaseStats from '@/types/PurchaseStats';
+
 export default interface PurchaseState {
     orders: PurchaseOrder[];
     stats: PurchaseStats;
