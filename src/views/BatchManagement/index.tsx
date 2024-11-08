@@ -27,32 +27,6 @@ const BatchManagement = () => {
     toggleAddModal 
   } = useBatchStore();
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'active':
-        return 'bg-green-100 text-green-800';
-      case 'expiring-soon':
-        return 'bg-yellow-100 text-yellow-800';
-      case 'expired':
-        return 'bg-red-100 text-red-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
-    }
-  };
-
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case 'active':
-        return 'Activo';
-      case 'expiring-soon':
-        return 'Próximo a vencer';
-      case 'expired':
-        return 'Vencido';
-      default:
-        return status;
-    }
-  };
-
   const filteredBatches = batches.filter(batch => 
     batch.product.toLowerCase().includes(searchQuery.toLowerCase()) ||
     batch.batchNumber.toLowerCase().includes(searchQuery.toLowerCase())
@@ -97,23 +71,32 @@ const BatchManagement = () => {
             <TableHeader>
               <TableRow>
                 <TableHead>PRODUCTO</TableHead>
+                <TableHead>LABORATORIO</TableHead>
                 <TableHead>LOTE</TableHead>
                 <TableHead>FECHA DE VENCIMIENTO</TableHead>
+                <TableHead>RSN</TableHead>
                 <TableHead>CANTIDAD</TableHead>
-                <TableHead>ESTADO</TableHead>
+                <TableHead>CLASE</TableHead>
+                <TableHead>CATEGORIA</TableHead>
+                <TableHead>PROTOCOLO</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredBatches.map((batch) => (
                 <TableRow key={batch.id}>
                   <TableCell className="font-medium">{batch.product}</TableCell>
+                  <TableCell>{batch.laboratory}</TableCell>
                   <TableCell>{batch.batchNumber}</TableCell>
                   <TableCell>{batch.expiryDate}</TableCell>
+                  <TableCell>{batch.sanitaryRegister}</TableCell>
                   <TableCell>{batch.quantity.toLocaleString()}</TableCell>
+                  <TableCell>{batch.class}</TableCell>
+                  <TableCell>{batch.category}</TableCell>
                   <TableCell>
-                    <span className={`px-2 py-1 rounded-full text-sm ${getStatusColor(batch.status)}`}>
-                      {getStatusText(batch.status)}
-                    </span>
+                    
+                    <a href={batch.protocol} target="_blank" rel="noreferrer" className='text-blue-500 hover:underline'>
+                      Ver protocolo
+                    </a>
                   </TableCell>
                 </TableRow>
               ))}
