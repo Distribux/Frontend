@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Card,
   CardContent,
@@ -39,7 +38,7 @@ import PriceAnalysis from '@/types/PriceAnalysis';
 import EstimatedImpact from '@/types/EstimatedImpact';
 import PriceRecommendation from '@/types/PriceRecommendation';
 
-export const PriceManagement: React.FC = () => {
+const PriceManagement = () => {
   const { selectedProduct, setSelectedProduct } = usePriceStore();
 
   // Sample data - replace with actual data from your API
@@ -241,3 +240,5 @@ export const PriceManagement: React.FC = () => {
     </div>
   );
 };
+
+export default PriceManagement;
