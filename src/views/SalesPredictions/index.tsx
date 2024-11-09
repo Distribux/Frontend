@@ -2,7 +2,8 @@ import {
     Card,
     CardContent,
     CardHeader,
-    CardTitle
+    CardTitle,
+    CardDescription
 } from '@/components/ui/card';
 import {
     Select,
@@ -95,41 +96,6 @@ const SalesPredictions = () => {
                 </Select>
             </div>
 
-            {/* Sales Trend Chart */}
-            <Card>
-                <CardHeader>
-                    <CardTitle>Tendencia de Ventas</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <div className="h-[300px]">
-                        <ResponsiveContainer width="100%" height="100%">
-                            <LineChart data={salesData}>
-                                <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="month" />
-                                <YAxis />
-                                <Tooltip />
-                                <Legend />
-                                <Line
-                                    type="monotone"
-                                    dataKey="actualSales"
-                                    stroke="#8884d8"
-                                    name="Ventas Actuales"
-                                    strokeWidth={2}
-                                />
-                                <Line
-                                    type="monotone"
-                                    dataKey="prediction"
-                                    stroke="#82ca9d"
-                                    name="Predicción"
-                                    strokeDasharray="5 5"
-                                    strokeWidth={2}
-                                />
-                            </LineChart>
-                        </ResponsiveContainer>
-                    </div>
-                </CardContent>
-            </Card>
-
             {/* Prediction Summary */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <Card>
@@ -172,21 +138,44 @@ const SalesPredictions = () => {
                 </Card>
             </div>
 
-            {/* Top 5 Products */}
+            <div className="flex flex-col justify-between items-center">
+                <h1 className="flex w-full text-2xl font-bold">KPI's (Indicadores)</h1>
+                <p className="flex w-full text-lg">
+                    Estos indicadores clave de rendimiento (KPI) son métricas que miden el rendimiento de su negocio y le ayudan a evaluar su éxito en el logro de sus objetivos.
+                </p>
+            </div>
+
+            {/* Sales Trend Chart */}
             <Card>
                 <CardHeader>
-                    <CardTitle>Top 5 Productos (Predicción)</CardTitle>
+                    <CardTitle>Tendencia de Ventas</CardTitle>
+                    <CardDescription>Comparación de ventas reales y predicciones</CardDescription>
                 </CardHeader>
                 <CardContent>
                     <div className="h-[300px]">
                         <ResponsiveContainer width="100%" height="100%">
-                            <BarChart data={topProducts}>
+                            <LineChart data={salesData}>
                                 <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="name" angle={-45} textAnchor="end" height={100} />
+                                <XAxis dataKey="month" />
                                 <YAxis />
                                 <Tooltip />
-                                <Bar dataKey="predictedSales" fill="#8884d8" />
-                            </BarChart>
+                                <Legend />
+                                <Line
+                                    type="monotone"
+                                    dataKey="actualSales"
+                                    stroke="#8884d8"
+                                    name="Ventas Actuales"
+                                    strokeWidth={2}
+                                />
+                                <Line
+                                    type="monotone"
+                                    dataKey="prediction"
+                                    stroke="#82ca9d"
+                                    name="Predicción"
+                                    strokeDasharray="5 5"
+                                    strokeWidth={2}
+                                />
+                            </LineChart>
                         </ResponsiveContainer>
                     </div>
                 </CardContent>
@@ -205,6 +194,26 @@ const SalesPredictions = () => {
                                 <p className="text-gray-600">{rec.message}</p>
                             </div>
                         ))}
+                    </div>
+                </CardContent>
+            </Card>
+
+            {/* Top 5 Products */}
+            <Card>
+                <CardHeader>
+                    <CardTitle>Top 5 Productos (Predicción)</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <div className="h-[300px]">
+                        <ResponsiveContainer width="100%" height="100%">
+                            <BarChart data={topProducts}>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="name" angle={-45} textAnchor="end" height={100} />
+                                <YAxis />
+                                <Tooltip />
+                                <Bar dataKey="predictedSales" fill="#8884d8" />
+                            </BarChart>
+                        </ResponsiveContainer>
                     </div>
                 </CardContent>
             </Card>
